@@ -3,11 +3,10 @@
     <Navbar />
     <img alt="logo" src="./assets/logo.jpg" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
-    <br>
-    <br><br><br><br>
-    <br><br><br><br>
-    <br><br><br><br>
-    
+    <br />
+    <br /><br /><br /><br />
+    <br /><br /><br /><br />
+    <br /><br /><br /><br />
   </div>
 </template>
 
