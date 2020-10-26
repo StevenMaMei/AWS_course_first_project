@@ -12,19 +12,17 @@
               >{{ option.name }}</option
             >
           </select>
+       
         </div>
         <div class="col-sm">
           <!-- Styled -->
           <b-form-file
             @change="onFileSelected"
-            placeholder="Choose a image or drop it here..."
-            drop-placeholder="Drop image here..."
+            placeholder="Choose a image."
+           
           ></b-form-file>
 
-          <div id="preview">
-            <br />
-            <img class="rounded" v-if="url" :src="url" />
-          </div>
+          
         </div>
         <div class="col-">
           <button type="button" class="btn btn-info" @click="onUpload">
@@ -32,18 +30,42 @@
           </button>
         </div>
       </div>
-      <br/>
-      <div v-if="similarity !=0" class="row" style="
-    place-content: center;
-    color: white;
-">
-        <h2>Similarity with our DataBase: {{this.similarity}}%</h2>
+      <div class="row">
+        <div class="col-sm">
+   <div id="preview">
+            <br />
+            <img class="img-fluid" v-if="url2 && similarity!=0" :src="url2" />
+          </div>
+        </div>
+        <div class="col-sm">
+          <div id="preview">
+            <br />
+            <img class="img-fluid" v-if="url" :src="url" />
+          </div>
+        </div>
       </div>
-       <div v-if="similarity =0" class="row" style="
+      <br />
+      <div
+        v-if="this.similarity != 0"
+        class="row"
+        style="
     place-content: center;
     color: white;
-">
-        <h2>There are not similarity with our DataBase</h2>
+"
+      >
+        <h2>Similarity with our DataBase: {{ this.similarity }}%</h2>
+      </div>
+ <div
+        v-if="similarity === 0"
+        class="row"
+        style="
+    place-content: center;
+    color: white;
+"
+      >
+          <h1   style="
+    color: mediumspringgreen;
+"> There is not similarity with our DataBase</h1>
       </div>
     </div>
   </div>
@@ -56,9 +78,10 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      similarity:'',
+      similarity: "",
       selectedFile: null,
       url: null,
+      url2: null,
       selected: null,
       options: [
         { id: "Collections", name: "Añadir en la BD" },
@@ -71,10 +94,16 @@ export default {
       this.selectedFile = event.target.files[0];
       this.url = URL.createObjectURL(this.selectedFile);
     },
-    async setSimilarity(name){
-      const response = await axios.get(`https://0yy3h1j9sl.execute-api.us-west-2.amazonaws.com/produccion?fileName=` + name)
+    async setSimilarity(name) {
+
+
+      const response = await axios.get(
+        `https://0yy3h1j9sl.execute-api.us-west-2.amazonaws.com/produccion?fileName=` +
+          name
+     );
       var myObj = JSON.parse(response.data);
-      console.log(myObj.similarity);
+      console.log(myObj.imageRoute)
+      this.url2= "https://cloud2020grupo1.s3-us-west-2.amazonaws.com/"+myObj.imageRoute;
       this.similarity = myObj.similarity;
     },
     onUpload() {
@@ -99,6 +128,10 @@ export default {
         }
       });
       var name = this.selectedFile.name;
+     
+   
+
+        
       
       console.log(name);
       var promise = upload.promise();
@@ -111,13 +144,17 @@ export default {
         function(err) {
           return alert("There was an error uploading your photo: " + err);
         }
-        
       );
-
     }
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+  border-radius: .25rem!important;
+}
+</style>
