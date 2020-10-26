@@ -53,7 +53,7 @@
     color: white;
 "
       >
-        <h2>Similarity with our DataBase: {{ this.similarity }}%</h2>
+        <h2>Similarity with our DataBase: <h2 style="color: red;">{{ this.similarity }}%</h2></h2>
       </div>
  <div
         v-if="similarity === 0"
@@ -63,9 +63,7 @@
     color: white;
 "
       >
-          <h1   style="
-    color: mediumspringgreen;
-"> There is not similarity with our DataBase</h1>
+          <h1   style="color: mediumspringgreen;"> There is not similarity with our DataBase</h1>
       </div>
     </div>
   </div>
