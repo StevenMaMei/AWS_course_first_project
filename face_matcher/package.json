@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "start": "vue-cli-service serve"
   },
   "dependencies": {
     "aws-sdk": "^2.771.0",
@@ -14,12 +15,12 @@
     "bs-custom-file-input": "^1.3.4",
     "core-js": "^3.6.5",
     "dotenv": "^8.2.0",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "@vue/cli-service": "^4.5.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.0",
     "@vue/cli-plugin-eslint": "^4.5.0",
-    "@vue/cli-service": "^4.5.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
